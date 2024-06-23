@@ -1,0 +1,4 @@
+declare
+begin
+null;
+end;
