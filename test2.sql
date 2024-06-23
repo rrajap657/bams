@@ -1,4 +1,4 @@
 declare
 begin
-null;
+    dbms_output.put_line('Hi! welcome to github');
 end;
