@@ -3,6 +3,12 @@ return number
 as 
 v_max number;
 begin
-select greatest(x,y,z) into v_max from dual;
-return v_max;
+	with tab as (select x as val from dual
+		     union all
+		     select y from dual
+		     union all
+		     select z from dual)
+	select max(val) into v_max from tab;
+
+	return v_max;
 end;
