@@ -15,9 +15,11 @@ create table BAMS_Cust_Acct_Detl(account_id  NUMBER(12),
                                 constraint uk_acc_no unique(account_number),                         
                                 constraint fk_cust_id foreign key (customer_id ) references Customers(customer_id),
                                 constraint fk_acc_id foreign key (account_type_id ) references AccountTypes(account_type_id),
-                                constraint ck_stat check(status in('active','inact))
+                                constraint ck_stat check(status in('active','inactive'))
 			        );
 
+
+create sequence seq_account_id start with 1 increment by 1 maxvalue 999999999999 ;
 /
 COMMENT ON COLUMN BAMS_Cust_Acct_Detl.account_id IS 'A unique identifier for each account';
 /
