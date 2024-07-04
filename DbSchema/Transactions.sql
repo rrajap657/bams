@@ -15,6 +15,8 @@ create table BAMS_daly_tran_detl(transaction_id  NUMBER(16),
                                 constraint fk_tran_typ_id foreign key (transaction_type_id) references TransactionTypes(transaction_type_id));
 
 
+ -- Create sequence for transaction_id
+CREATE SEQUENCE seq_transaction_id START WITH 1 INCREMENT BY 1 MAXVALUE 99999999999999;
 
 /
 COMMENT ON COLUMN BAMS_daly_tran_detl.transaction_id IS 'A unique identifier for each transaction';
