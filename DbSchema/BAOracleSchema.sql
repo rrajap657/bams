@@ -254,6 +254,7 @@ CREATE TABLE BAMS_Cust_Loan_Detl (
     start_date DATE NOT NULL,  -- The date when the loan starts
     end_date DATE NOT NULL,  -- The date when the loan is expected to be fully repaid
     status VARCHAR2(20) CHECK (status IN ('active', 'paid', 'defaulted')) NOT NULL,  -- The status of the loan
+    constraint pk_loan_id primary key(loan_id),
     CONSTRAINT fk_customer
         FOREIGN KEY (customer_id) REFERENCES BAMS_Cust_Detl_Tabl(customer_id),  -- Foreign key constraint for customer_id
     CONSTRAINT fk_loan_type
