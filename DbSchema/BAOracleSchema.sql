@@ -254,7 +254,6 @@ CREATE TABLE BAMS_Cust_Loan_Detl (
     start_date DATE NOT NULL,  -- The date when the loan starts
     end_date DATE NOT NULL,  -- The date when the loan is expected to be fully repaid
     status VARCHAR2(20) CHECK (status IN ('active', 'paid', 'defaulted')) NOT NULL,  -- The status of the loan
-    constraint pk_loan_id primary key(loan_id),
     CONSTRAINT fk_customer
         FOREIGN KEY (customer_id) REFERENCES BAMS_Cust_Detl_Tabl(customer_id),  -- Foreign key constraint for customer_id
     CONSTRAINT fk_loan_type
@@ -429,10 +428,13 @@ NOCACHE;
 CREATE TABLE BAMS_ATMs_detl_tabl (
     atm_id NUMBER(6) PRIMARY KEY,  -- A unique identifier for each ATM
     location VARCHAR2(200) NOT NULL,  -- The location where the ATM is installed
-    branch_id NUMBER(6) REFERENCES bams_bran_detl_tabl(branch_id),  -- A foreign key that references the branch_id in the Branches table
-    head_office_id NUMBER(4) REFERENCES BAMS_Head_Ofsc_Detl(head_office_id),  -- A foreign key that references the head_office_id in the HeadOffice table
+    branch_id NUMBER(6),  -- A foreign key that references the branch_id in the Branches table
+    head_office_id NUMBER(4),  -- A foreign key that references the head_office_id in the HeadOffice table
     status VARCHAR2(20) NOT NULL CHECK (status IN ('active', 'inactive', 'maintenance'))  -- The status of the ATM
 );
+
+ALTER TABLE bams_atms_detl_tabl ADD CONSTRAINT fk_atm_br_id FOREIGN KEY ( branch_id )  REFERENCES bams_bran_detl_tabl ( branch_id );
+ALTER TABLE bams_atms_detl_tabl ADD CONSTRAINT fk_hd_id FOREIGN KEY ( head_office_id ) REFERENCES bams_head_ofsc_detl ( head_office_id );
 
 -- Add comments to columns
 COMMENT ON COLUMN BAMS_ATMs_detl_tabl.atm_id IS 'A unique identifier for each ATM';
